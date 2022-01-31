@@ -11,6 +11,10 @@ on:
 
 jobs:
   build:
+    env:
+      CAMINHO_PROJETO_TESTES: ./Debito.Tests/Debito.Tests.csproj
+      CAMINHO_PROJETO_WEBAPP: ./Debito.App
+      
     runs-on: windows-latest
 
     steps:
@@ -21,12 +25,15 @@ jobs:
         with:
           dotnet-version: '6.0.x'
           include-prerelease: true
+      
+      - name: Executar testes automatizados
+        run: dotnet test ${{ env.CAMINHO_PROJETO_TESTES }} --verbosity minimal
 
-      - name: Build with dotnet
-        run: dotnet build --configuration Release
+      - name: Build com o utilitario dotnet
+        run: dotnet build ${{ env.CAMINHO_PROJETO_WEBAPP }} --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish ${{ env.CAMINHO_PROJETO_WEBAPP }} -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
