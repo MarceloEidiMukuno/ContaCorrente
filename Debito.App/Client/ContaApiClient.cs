@@ -15,10 +15,9 @@ namespace ContaCorrente.ApiDebito.Clients
                 return true;
             };
 
-            // Create an HttpClient object
             HttpClient client = new HttpClient(handler);
 
-            HttpResponseMessage response = await client.GetAsync($"https://extrato.azurewebsites.net/v1/conta/{Agencia}/{Conta}");
+            HttpResponseMessage response = await client.GetAsync($"https://contas.azurewebsites.net/v1/conta/{Agencia}/{Conta}");
 
             return response.IsSuccessStatusCode;
 
