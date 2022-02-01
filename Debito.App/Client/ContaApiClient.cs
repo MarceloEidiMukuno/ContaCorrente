@@ -18,7 +18,7 @@ namespace ContaCorrente.ApiDebito.Clients
             // Create an HttpClient object
             HttpClient client = new HttpClient(handler);
 
-            HttpResponseMessage response = await client.GetAsync($"https://localhost:7265/v1/conta/{Agencia}/{Conta}");
+            HttpResponseMessage response = await client.GetAsync($"https://extrato.azurewebsites.net/v1/conta/{Agencia}/{Conta}");
 
             return response.IsSuccessStatusCode;
 
