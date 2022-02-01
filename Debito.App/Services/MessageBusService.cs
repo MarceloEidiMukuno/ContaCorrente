@@ -15,7 +15,7 @@ namespace ContaCorrente.ApiDebito.Services
 
         public async Task SendAsync<T>(T data, string queue)
         {
-            var connectionString = _configuration.GetConnectionString("ServiceConnectionString");
+            var connectionString = _configuration.GetSection("ServiceConnectionString").Value;
             await using var client = new ServiceBusClient(connectionString);
 
             var sender = client.CreateSender(queue);
